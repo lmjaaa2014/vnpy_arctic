@@ -28,7 +28,6 @@ def run_parent(total_n):
 
 
 
-
 if __name__ == '__main__':
     n_default = len(load_json('connect_ctp_list.json'))  # 单个账号可能存在连接上限
 
