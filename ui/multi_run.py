@@ -14,24 +14,22 @@ def run_parent(total_n):
     # 设置
     reboot_func = trading_reboot_rule
     vn_product_filter = [Product.FUTURES.value, Product.OPTION.value]
-
+    connect_list = load_json('connect_ctp_list.json')
     child_task = {n: None for n in range(total_n)}
     for n in range(total_n):
+        name = connect_list[n].get("用户名")
+        print(name)
         child_task[n] = multiprocessing.Process(
-            target=main, args=())
+            target=main, args=(name,))
         child_task[n].start()
         print(f"{datetime.now()}【{n}/{total_n}】子进程启动")
-
-
-
-
-
 
 
 if __name__ == '__main__':
     n_default = len(load_json('connect_ctp_list.json'))  # 单个账号可能存在连接上限
 
     import argparse
+
     parser = argparse.ArgumentParser()
     parser.add_argument('-n', type=int, default=n_default, help='multiprocess total n')
     run_parent(parser.parse_args().n)

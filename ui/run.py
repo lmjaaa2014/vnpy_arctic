@@ -66,7 +66,8 @@ from vnpy_datamanager import DataManagerApp
 # from vnpy.app.paper_account import PaperAccountApp
 from vnpy_datarecorder import DataRecorderApp
 
-def main():
+
+def main(account_name: str):
     """"""
 
     qapp = create_qapp()
@@ -74,8 +75,6 @@ def main():
     event_engine = EventEngine()
 
     main_engine = MainEngine(event_engine)
-
-
 
     main_engine.add_gateway(CtpGateway)
     # main_engine.add_gateway(CtptestGateway)
@@ -137,7 +136,8 @@ def main():
     # main_engine.add_app(PortfolioManagerApp)
     # main_engine.add_app(PaperAccountApp)
     # 写在创建main_engine对象后
-    main_engine.add_app(DataRecorderApp)
+    app_engine = main_engine.add_app(DataRecorderApp)
+    app_engine.engine_start(account_name)
     main_engine.add_app(DataManagerApp)
     main_window = MainWindow(main_engine, event_engine)
     main_window.showMaximized()
@@ -145,5 +145,3 @@ def main():
     qapp.exec()
 
 
-if __name__ == "__main__":
-    main()
