@@ -90,7 +90,7 @@ def save_vn_contracts(gw_name: str, all_contracts: List["ContractData"], product
     :return:
     """
     df = vn_contract_df(all_contracts)
-    if product_filter:
+    if product_filter and len(df)!=0:
         df = df[df['product'].isin(product_filter)]
     if df.empty:
         return 0

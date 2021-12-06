@@ -6,7 +6,7 @@ ctp实时行情
 """
 import datetime
 import multiprocessing
-from vnpy_datarecorder import DataRecorderApp
+
 from vnpy.gateway.ctp import CtpGateway
 from vnpy.trader.constant import Product
 from vnpy.trader.utility import load_json
@@ -29,8 +29,7 @@ def run_parent(total_n):
                 if child_task[n] is None:  # 此处判断是否有子进程在运行
                     child_task[n] = multiprocessing.Process(
                         target=run_task, args=(n, total_n,
-                                               CtpGateway, 'CTP', load_json('connect_ctp_list.json'),
-                                               DataRecorderApp, reboot_func,
+                                               CtpGateway, 'CTP', load_json('connect_ctp_list.json'), reboot_func,
                                                True, vn_product_filter
                                                )
                     )
